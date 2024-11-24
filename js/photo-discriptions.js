@@ -8,7 +8,6 @@ const DESCRIPTION_NUMBER = 25;
 const LIKES_MIN_NUMBER = 15;
 const LIKES_MAX_NUMBER = 200;
 
-
 const PHOTO_DESCRIPTIONS = [
   'Уникальный опыт который стоит пережить каждому',
   'Остались только незабываемые впечатления',
