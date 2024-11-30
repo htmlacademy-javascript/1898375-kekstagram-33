@@ -54,14 +54,14 @@ const renderComments = () => {
 // Закрытие и показ поста
 const openBigPicture = () => {
   bigPicture.classList.remove('hidden');
-  document.body.classList.add('.modal-open');
+  document.body.classList.add('modal-open');
 };
 
 const closeBigPicture = () => {
   commentsCount = COMMENTS_STEP;
 
   bigPicture.classList.add('hidden');
-  document.body.classList.remove('.modal-open');
+  document.body.classList.remove('modal-open');
 
   document.removeEventListener('keydown', onEscKeydown);
 };
