@@ -1,4 +1,4 @@
-
+import {showBigPicture} from './photo-detail-view.js';
 
 const pictureTemplate = document.querySelector('#picture')
   .content.querySelector('.picture');
@@ -13,6 +13,15 @@ const renderPhotos = (container, similarPost) => {
     newElementImg.alt = post.description;
     newElement.querySelector('.picture__comments').textContent = post.comments.length;
     newElement.querySelector('.picture__likes').textContent = post.likes;
+
+
+    const onNewElementClick = (evt) => {
+      evt.preventDefault();
+
+      showBigPicture(post);
+    };
+
+    newElement.addEventListener('click', onNewElementClick);
 
     similarPhotoGragment.append(newElement);
   });
