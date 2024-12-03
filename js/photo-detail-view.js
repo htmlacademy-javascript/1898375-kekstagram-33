@@ -5,9 +5,10 @@ const bigPictureImg = bigPicture.querySelector('.big-picture__img img');
 const likesCount = bigPicture.querySelector('.likes-count');
 const socialCommentsCount = bigPicture.querySelector('.social__comment-count');
 const pictureDesctiption = bigPicture.querySelector('.social__caption');
-const closeButton = bigPicture.querySelector ('.big-picture__cancel');
-const socialComment = bigPicture.querySelector ('.social__comment');
-const commentsList = bigPicture.querySelector ('.social__comments');
+const closeButton = bigPicture.querySelector('.big-picture__cancel');
+const socialComment = bigPicture.querySelector('.social__comment');
+const commentsList = bigPicture.querySelector('.social__comments');
+const loadButton = document.querySelector('.comments-loader');
 const commentFragment = document.createDocumentFragment();
 
 let commentsCount = COMMENTS_STEP;
@@ -48,7 +49,18 @@ const renderComments = () => {
     commentFragment.append(createComment(currentComments[i]));
   }
 
+  if (currentComments.length <= COMMENTS_STEP || commentsCount >= currentComments.length) {
+    loadButton.classList.add('hidden');
+  } else {
+    loadButton.classList.remove('hidden');
+  }
+
   commentsList.append(commentFragment);
+};
+
+const onLoadButtonClick = () => {
+  commentsCount += COMMENTS_STEP;
+  renderComments();
 };
 
 // Закрытие и показ поста
@@ -76,15 +88,10 @@ const onCloseButtonClick = () => {
   closeBigPicture();
 };
 
-const hideCommentsCount = () => {
-  socialCommentsCount.classList.add('hidden');
-  bigPicture.querySelector('.comments-loader').classList.add('hidden');
-};
 
 const showBigPicture = (picture) => {
   currentComments = picture.comments.slice();
 
-  hideCommentsCount();
   fillBigPicture(picture);
   renderComments();
   openBigPicture();
@@ -93,5 +100,6 @@ const showBigPicture = (picture) => {
 };
 
 closeButton.addEventListener('click', onCloseButtonClick);
+loadButton.addEventListener('click', onLoadButtonClick);
 
 export {showBigPicture};
