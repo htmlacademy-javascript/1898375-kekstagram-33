@@ -17,4 +17,12 @@ const getRandomInt = (min, max) => {
 //Получить случайный элемент массива
 const getRandomArrayItem = (array) => array[getRandomInt(ARRAY_MIN_INDEX, array.length - 1)];
 
-export {getRandomInt, getRandomArrayItem};
+// Если класс есть - удалить, если его нет - добавить
+
+const toggleClass = (element, className = '') => {
+  if (element) {
+    element.classList.toggle(className);
+  }
+};
+
+export {getRandomInt, getRandomArrayItem, toggleClass};

@@ -1,3 +1,5 @@
+import {toggleClass} from './util.js';
+
 const COMMENTS_STEP = 5;
 
 const bigPicture = document.querySelector('.big-picture');
@@ -63,17 +65,16 @@ const onLoadButtonClick = () => {
   renderComments();
 };
 
-// Закрытие и показ поста
-const openBigPicture = () => {
-  bigPicture.classList.remove('hidden');
-  document.body.classList.add('modal-open');
+// Показать или закрыть пост
+const modalControl = () => {
+  toggleClass(bigPicture, 'hidden');
+  toggleClass(document.body, 'modal-open');
 };
 
 const closeBigPicture = () => {
   commentsCount = COMMENTS_STEP;
 
-  bigPicture.classList.add('hidden');
-  document.body.classList.remove('modal-open');
+  modalControl();
 
   document.removeEventListener('keydown', onEscKeydown);
 };
@@ -94,7 +95,7 @@ const showBigPicture = (picture) => {
 
   fillBigPicture(picture);
   renderComments();
-  openBigPicture();
+  modalControl();
 
   document.addEventListener('keydown', onEscKeydown);
 };
