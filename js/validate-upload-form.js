@@ -51,12 +51,10 @@ const checkHashtagRepeats = (text) => {
 
 const checkCommentMaxLength = (text) => checkLength(text, COMMENT_MAX_LENGTH);
 
-
 pristine.addValidator(uploadPhotoHashtags, checkHashtag, SHOWN_MESSAGES.hashtagRule);
 pristine.addValidator(uploadPhotoHashtags, checkHashtagMaxQuant, SHOWN_MESSAGES.maxQuantRule);
 pristine.addValidator(uploadPhotoHashtags, checkHashtagRepeats, SHOWN_MESSAGES.noRepeatRule);
 pristine.addValidator(uploadPhotoDescription, checkCommentMaxLength, SHOWN_MESSAGES.maxLengthComment);
-
 
 uploadPhotoForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
