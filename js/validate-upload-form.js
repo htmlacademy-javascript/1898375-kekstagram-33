@@ -2,12 +2,6 @@ const HASHTAG_MAX_LENGTH = 19;
 const HASHTAG_MAX_QUANT = 5;
 const HASHTAG_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const COMMENT_MAX_LENGTH = 140;
-const SHOWN_MESSAGES = {
-  hashtagRule: `Хэштег должен начинаться с #, далее буквы и числа, но не более ${HASHTAG_MAX_LENGTH}`,
-  maxQuantRule: `Максимальное количество хэштегов - ${HASHTAG_MAX_QUANT}`,
-  noRepeatRule: 'Хэштеги не должны повторяться',
-  maxLengthComment: `Максимальная длина комментария ${COMMENT_MAX_LENGTH} символов`
-};
 
 const uploadPhotoForm = document.querySelector('.img-upload__form');
 const uploadPhotoHashtags = uploadPhotoForm.querySelector('.text__hashtags');
@@ -51,17 +45,47 @@ const checkHashtagRepeats = (text) => {
 
 const checkCommentMaxLength = (text) => checkLength(text, COMMENT_MAX_LENGTH);
 
-pristine.addValidator(uploadPhotoHashtags, checkHashtag, SHOWN_MESSAGES.hashtagRule);
-pristine.addValidator(uploadPhotoHashtags, checkHashtagMaxQuant, SHOWN_MESSAGES.maxQuantRule);
-pristine.addValidator(uploadPhotoHashtags, checkHashtagRepeats, SHOWN_MESSAGES.noRepeatRule);
-pristine.addValidator(uploadPhotoDescription, checkCommentMaxLength, SHOWN_MESSAGES.maxLengthComment);
-
-uploadPhotoForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-
-  const isValid = pristine.validate();
-
-  if (isValid) {
-    uploadPhotoForm.submit();
+const validateSettings = {
+  hashtagRule: {
+    inputElement: uploadPhotoHashtags,
+    validator: checkHashtag,
+    errorMessage: `Хэштег должен начинаться с #, далее буквы и числа, но не более ${HASHTAG_MAX_LENGTH}`
+  },
+  maxQuantRule: {
+    inputElement: uploadPhotoHashtags,
+    validator: checkHashtagMaxQuant,
+    errorMessage: `Максимальное количество хэштегов - ${HASHTAG_MAX_QUANT}`
+  },
+  noRepeatRule: {
+    inputElement: uploadPhotoHashtags,
+    validator: checkHashtagRepeats,
+    errorMessage: 'Хэштеги не должны повторяться'
+  },
+  lengthCommentRule: {
+    inputElement: uploadPhotoDescription,
+    validator: checkCommentMaxLength,
+    errorMessage: `Максимальная длина комментария ${COMMENT_MAX_LENGTH} символов`
   }
-});
+
+};
+
+for (const key in validateSettings) {
+  pristine.addValidator(
+    validateSettings[key].inputElement,
+    validateSettings[key].validator,
+    validateSettings[key].errorMessage
+  );
+
+}
+
+{
+  uploadPhotoForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const isValid = pristine.validate();
+
+    if (isValid) {
+      uploadPhotoForm.submit();
+    }
+  });
+}
