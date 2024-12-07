@@ -6,6 +6,7 @@ import './photo-detail-view.js';
 import './photo-load.js';
 import './validate-upload-form.js';
 import './photo-scale.js';
+import './photo-filters.js';
 
 
 const picturesContainer = document.querySelector('.pictures');
