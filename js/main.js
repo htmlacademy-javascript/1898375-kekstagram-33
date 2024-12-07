@@ -5,6 +5,7 @@ import {renderPhotos} from './photo-rendering.js';
 import './photo-detail-view.js';
 import './photo-load.js';
 import './validate-upload-form.js';
+import './photo-scale.js';
 
 
 const picturesContainer = document.querySelector('.pictures');
