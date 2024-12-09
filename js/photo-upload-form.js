@@ -58,12 +58,12 @@ const submitButtonText = {
 
 const disableButton = (text) => {
   submitButton.disabled = true;
-  submitButton.disabled = text;
+  submitButton.textContent = text;
 };
 
 const enableButton = (text) => {
   submitButton.disabled = false;
-  submitButton.disabled = text;
+  submitButton.textContent = text;
 };
 
 // Отправка формы
@@ -91,3 +91,5 @@ const onFormSubmit = (evt) => {
 };
 
 uploadPhotoForm.addEventListener('submit', onFormSubmit);
+
+

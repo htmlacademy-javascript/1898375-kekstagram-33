@@ -4,7 +4,7 @@ const closeNotification = (evt) => {
   evt.stopPropagation();
 
   const existElement = document.querySelector('.success') || document.querySelector('.error');
-  const closeButton = existElement.querySelector('.button');
+  const closeButton = existElement.querySelector('.success__button') || document.querySelector('.error__button');
 
   if (evt.target === existElement || evt.target === closeButton || evt.key === 'Escape') {
     existElement.remove();
