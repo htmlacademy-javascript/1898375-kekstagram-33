@@ -1,6 +1,7 @@
 //  ОБЩИЕ ФУНКЦИИ
 
 const ARRAY_MIN_INDEX = 0;
+const REMOVE_MESSAGE_TIMEOUT = 5000;
 
 //Получение случайного целого числа в заданном интервале, включительно.
 const getRandomInt = (min, max) => {
@@ -25,4 +26,22 @@ const toggleClass = (element, className = '') => {
   }
 };
 
-export {getRandomInt, getRandomArrayItem, toggleClass};
+//Показ сообщения об ошибке
+
+const errorTemplate = document.querySelector('#data-error').content;
+
+const showErrorMessage = (message) => {
+  const errorArea = errorTemplate.cloneNode(true);
+  if (message) {
+    errorArea.querySelector('.data-error__title').textContent = message;
+  }
+  document.body.append(errorArea);
+
+  const errorLoadDataArea = document.body.querySelector('.data-error');
+
+  setTimeout (() => {
+    errorLoadDataArea.remove();
+  }, REMOVE_MESSAGE_TIMEOUT);
+};
+
+export {getRandomInt, getRandomArrayItem, toggleClass, showErrorMessage};
