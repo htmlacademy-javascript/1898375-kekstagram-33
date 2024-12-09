@@ -45,7 +45,7 @@ const checkHashtagRepeats = (text) => {
 
 const checkCommentMaxLength = (text) => checkLength(text, COMMENT_MAX_LENGTH);
 
-const validateSettings = {
+const ValidateSettings = {
   hashtagRule: {
     inputElement: uploadPhotoHashtags,
     validator: checkHashtag,
@@ -69,23 +69,13 @@ const validateSettings = {
 
 };
 
-for (const key in validateSettings) {
+for (const key in ValidateSettings) {
   pristine.addValidator(
-    validateSettings[key].inputElement,
-    validateSettings[key].validator,
-    validateSettings[key].errorMessage
+    ValidateSettings[key].inputElement,
+    ValidateSettings[key].validator,
+    ValidateSettings[key].errorMessage
   );
 
 }
 
-{
-  uploadPhotoForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
-    const isValid = pristine.validate();
-
-    if (isValid) {
-      uploadPhotoForm.submit();
-    }
-  });
-}
+export {pristine};

@@ -37,3 +37,9 @@ const setPhotoScale = () => {
 };
 
 setPhotoScale();
+
+const resetPhotoScale = () => {
+  updatePhotoScale(scaleSettings.MAX_VALUE);
+};
+
+export {resetPhotoScale};
