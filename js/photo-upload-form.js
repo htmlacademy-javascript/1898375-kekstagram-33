@@ -80,7 +80,6 @@ const sendFormData = async (form) => {
     } catch (error) {
       appendNotification(templateError);
     } finally {
-      console.log('работаем');
       enableButton(submitButtonText.IDLE);
     }
   }
