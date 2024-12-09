@@ -45,7 +45,7 @@ const checkHashtagRepeats = (text) => {
 
 const checkCommentMaxLength = (text) => checkLength(text, COMMENT_MAX_LENGTH);
 
-const ValidateSettings = {
+const Rules = {
   hashtagRule: {
     inputElement: uploadPhotoHashtags,
     validator: checkHashtag,
@@ -69,11 +69,11 @@ const ValidateSettings = {
 
 };
 
-for (const key in ValidateSettings) {
+for (const key in Rules) {
   pristine.addValidator(
-    ValidateSettings[key].inputElement,
-    ValidateSettings[key].validator,
-    ValidateSettings[key].errorMessage
+    Rules[key].inputElement,
+    Rules[key].validator,
+    Rules[key].errorMessage
   );
 
 }
