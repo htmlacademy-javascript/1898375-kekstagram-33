@@ -10,5 +10,4 @@ import './reset-settings.js';
 import './notification.js';
 import './gallery-rendering.js';
 import './gallery-filters.js';
-
-
+import './upload-client-photo.js';
