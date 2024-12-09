@@ -1,22 +1,5 @@
-//  ОБЩИЕ ФУНКЦИИ
-
-const ARRAY_MIN_INDEX = 0;
 const REMOVE_MESSAGE_TIMEOUT = 5000;
-
-//Получение случайного целого числа в заданном интервале, включительно.
-const getRandomInt = (min, max) => {
-  if (min >= 0 && max > 0 && min !== max && max > min) {
-    const minValue = Math.ceil(min);
-    const maxValue = Math.floor(max);
-
-    return Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
-  }
-
-  return null;
-};
-
-//Получить случайный элемент массива
-const getRandomArrayItem = (array) => array[getRandomInt(ARRAY_MIN_INDEX, array.length - 1)];
+const RERENDER_TIMEOUT = 500;
 
 // Если класс есть - удалить, если его нет - добавить
 
@@ -44,4 +27,33 @@ const showErrorMessage = (message) => {
   }, REMOVE_MESSAGE_TIMEOUT);
 };
 
-export {getRandomInt, getRandomArrayItem, toggleClass, showErrorMessage};
+const shuffleArray = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const randomIndex = Math.floor(Math.random() * (i + 1));
+    [array[i], array[randomIndex]] = [array[randomIndex], array[i]];
+  }
+  return array;
+};
+
+// Функция взята из интернета и доработана
+// Источник - https://www.freecodecamp.org/news/javascript-debounce-example
+
+const debounce = (callback, timeoutDelay = RERENDER_TIMEOUT) => {
+  // Используем замыкания, чтобы id таймаута у нас навсегда приклеился
+  // к возвращаемой функции с setTimeout, тогда мы его сможем перезаписывать
+  let timeoutId;
+
+  return (...rest) => {
+    // Перед каждым новым вызовом удаляем предыдущий таймаут,
+    // чтобы они не накапливались
+    clearTimeout(timeoutId);
+
+    // Затем устанавливаем новый таймаут с вызовом колбэка на ту же задержку
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+
+    // Таким образом цикл «поставить таймаут - удалить таймаут» будет выполняться,
+    // пока действие совершается чаще, чем переданная задержка timeoutDelay
+  };
+};
+
+export {toggleClass, showErrorMessage,shuffleArray, debounce};

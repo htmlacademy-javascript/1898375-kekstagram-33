@@ -3,8 +3,9 @@ import {showBigPicture} from './photo-detail-view.js';
 const pictureTemplate = document.querySelector('#picture')
   .content.querySelector('.picture');
 const similarPhotoGragment = document.createDocumentFragment();
+const picturesContainer = document.querySelector('.pictures');
 
-const renderPhotos = (container, similarPost) => {
+const renderPhotos = (similarPost) => {
   similarPost.forEach((post) => {
     const newElement = pictureTemplate.cloneNode(true);
     const newElementImg = newElement.querySelector('.picture__img');
@@ -26,7 +27,7 @@ const renderPhotos = (container, similarPost) => {
     similarPhotoGragment.append(newElement);
   });
 
-  container.append(similarPhotoGragment);
+  picturesContainer.append(similarPhotoGragment);
 };
 
 export {renderPhotos};

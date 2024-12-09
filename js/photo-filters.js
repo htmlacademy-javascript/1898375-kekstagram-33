@@ -4,7 +4,7 @@ const sliderValue = filterSlider.querySelector('.effect-level__value');
 const effectInput = document.querySelectorAll('.effects__radio');
 const uploadPhotoPreview = document.querySelector('.img-upload__preview > img');
 
-const effects = [
+const Effects = [
   { filter: 'none' },
   { filter: 'grayscale', min: 0, max: 1, step: 0.1 },
   { filter: 'sepia', min: 0, max: 1, step: 0.1 },
@@ -60,7 +60,7 @@ const setFilters = () => {
   effectInput.forEach((radio, index) => {
     radio.addEventListener('change', () => {
       uploadPhotoPreview.className = `effects__preview--${radio.value}`;
-      applyEffect(effects[index]);
+      applyEffect(Effects[index]);
     });
   });
 };
