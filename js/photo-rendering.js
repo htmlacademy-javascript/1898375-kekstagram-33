@@ -5,8 +5,8 @@ const pictureTemplate = document.querySelector('#picture')
 const similarPhotoGragment = document.createDocumentFragment();
 const picturesContainer = document.querySelector('.pictures');
 
-const renderPhotos = (similarPost) => {
-  similarPost.forEach((post) => {
+const renderPhotos = (similarPosts) => {
+  similarPosts.forEach((post) => {
     const newElement = pictureTemplate.cloneNode(true);
     const newElementImg = newElement.querySelector('.picture__img');
 

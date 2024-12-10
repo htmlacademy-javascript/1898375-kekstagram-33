@@ -4,6 +4,11 @@ import {pristine} from './validate-upload-form.js';
 import {resetSettings} from './reset-settings.js';
 import {appendNotification} from './notification.js';
 
+const SubmitButtonText = {
+  IDLE: 'Сохранить',
+  SENDING: 'Сохраняю...',
+};
+
 const uploadPhotoContainer = document.querySelector('.img-upload');
 const uploadPhotoForm = uploadPhotoContainer.querySelector('.img-upload__form');
 const imgUploadInput = uploadPhotoContainer.querySelector('.img-upload__input');
@@ -16,13 +21,13 @@ const submitButton = uploadPhotoContainer.querySelector('.img-upload__submit');
 const templateSuccess = document.querySelector('#success').content;
 const templateError = document.querySelector('#error').content;
 
-const overlayControl = () => {
+const toggleOverlay = () => {
   toggleClass(uploadOverlay, 'hidden');
   toggleClass(document.body, 'modal-open');
 };
 
 const closeOverlay = () => {
-  overlayControl();
+  toggleOverlay();
 
   resetSettings();
 
@@ -42,7 +47,7 @@ const onCloseButtonClick = () => {
 };
 
 imgUploadInput.addEventListener('change', () => {
-  overlayControl();
+  toggleOverlay();
 
   document.addEventListener('keydown', onEscKeydown);
 });
@@ -50,11 +55,6 @@ imgUploadInput.addEventListener('change', () => {
 closeButton.addEventListener('click', onCloseButtonClick);
 
 //Блокировка кнопки при отправке
-
-const submitButtonText = {
-  IDLE: 'Сохранить',
-  SENDING: 'Сохраняю...',
-};
 
 const disableButton = (text) => {
   submitButton.disabled = true;
@@ -72,7 +72,7 @@ const sendFormData = async (form) => {
   const isValid = pristine.validate();
 
   if (isValid) {
-    disableButton(submitButtonText.SENDING);
+    disableButton(SubmitButtonText.SENDING);
 
     try {
       await sendData (new FormData(form));
@@ -80,7 +80,7 @@ const sendFormData = async (form) => {
     } catch (error) {
       appendNotification(templateError);
     } finally {
-      enableButton(submitButtonText.IDLE);
+      enableButton(SubmitButtonText.IDLE);
     }
   }
 };

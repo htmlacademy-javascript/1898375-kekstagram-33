@@ -1,7 +1,7 @@
 const filterSlider = document.querySelector('.effect-level');
 const sliderElement = filterSlider.querySelector('.effect-level__slider');
 const sliderValue = filterSlider.querySelector('.effect-level__value');
-const effectInput = document.querySelectorAll('.effects__radio');
+const effectInputs = document.querySelectorAll('.effects__radio');
 const uploadPhotoPreview = document.querySelector('.img-upload__preview > img');
 
 const Effects = [
@@ -57,7 +57,7 @@ const applyEffect = (effect) => {
 
 
 const setFilters = () => {
-  effectInput.forEach((radio, index) => {
+  effectInputs.forEach((radio, index) => {
     radio.addEventListener('change', () => {
       uploadPhotoPreview.className = `effects__preview--${radio.value}`;
       applyEffect(Effects[index]);

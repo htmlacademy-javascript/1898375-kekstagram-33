@@ -66,7 +66,7 @@ const onLoadButtonClick = () => {
 };
 
 // Показать или закрыть пост
-const modalControl = () => {
+const toggleModal = () => {
   toggleClass(bigPicture, 'hidden');
   toggleClass(document.body, 'modal-open');
 };
@@ -74,7 +74,7 @@ const modalControl = () => {
 const closeBigPicture = () => {
   commentsCount = COMMENTS_STEP;
 
-  modalControl();
+  toggleModal();
 
   document.removeEventListener('keydown', onEscKeydown);
 };
@@ -95,7 +95,7 @@ const showBigPicture = (picture) => {
 
   fillBigPicture(picture);
   renderComments();
-  modalControl();
+  toggleModal();
 
   document.addEventListener('keydown', onEscKeydown);
 };

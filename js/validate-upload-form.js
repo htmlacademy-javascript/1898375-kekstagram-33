@@ -33,9 +33,9 @@ const checkHashtagMaxQuant = (text) => {
   return checkLength(hashtags,HASHTAG_MAX_QUANT);
 };
 
-const checkRepeats = (array) => {
-  const uniqueItems = new Set(array.map((item) => item.toUpperCase())); //приведение хэштегов к верхнему регистру
-  return uniqueItems.size === array.length; //проверка количества полученных хэштегов и длины исходного массива, при несовпадении, возвращает false
+const checkRepeats = (arrays) => {
+  const uniqueItems = new Set(arrays.map((item) => item.toUpperCase())); //приведение хэштегов к верхнему регистру
+  return uniqueItems.size === arrays.length; //проверка количества полученных хэштегов и длины исходного массива, при несовпадении, возвращает false
 };
 
 const checkHashtagRepeats = (text) => {
