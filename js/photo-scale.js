@@ -1,13 +1,13 @@
-const scaleControlSmaller = document.querySelector('.scale__control--smaller');
-const scaleControlValue = document.querySelector('.scale__control--value');
-const scaleControlBigger = document.querySelector('.scale__control--bigger');
-const uploadPhoto = document.querySelector('.img-upload__preview > img');
-
-const scaleSettings = {
+const ScaleSettings = {
   MIN_VALUE: 25,
   MAX_VALUE: 100,
   STEP: 25
 };
+
+const scaleControlSmaller = document.querySelector('.scale__control--smaller');
+const scaleControlValue = document.querySelector('.scale__control--value');
+const scaleControlBigger = document.querySelector('.scale__control--bigger');
+const uploadPhoto = document.querySelector('.img-upload__preview > img');
 
 const updatePhotoScale = (scale) => {
   scaleControlValue.value = `${scale}%`;
@@ -17,29 +17,29 @@ const updatePhotoScale = (scale) => {
 const onScaleChange = (change) => {
   let scale = parseInt(scaleControlValue.value, 10) + change;
 
-  if (scale > scaleSettings.MAX_VALUE) {
-    scale = scaleSettings.MAX_VALUE;
+  if (scale > ScaleSettings.MAX_VALUE) {
+    scale = ScaleSettings.MAX_VALUE;
   }
 
-  if (scale < scaleSettings.MIN_VALUE) {
-    scale = scaleSettings.MIN_VALUE;
+  if (scale < ScaleSettings.MIN_VALUE) {
+    scale = ScaleSettings.MIN_VALUE;
   }
 
   updatePhotoScale(scale);
 };
 
 const setPhotoScale = () => {
-  updatePhotoScale(scaleSettings.MAX_VALUE);
+  updatePhotoScale(ScaleSettings.MAX_VALUE);
 
-  scaleControlSmaller.addEventListener('click', () => onScaleChange(-scaleSettings.STEP));
-  scaleControlBigger.addEventListener('click', () => onScaleChange(scaleSettings.STEP));
+  scaleControlSmaller.addEventListener('click', () => onScaleChange(-ScaleSettings.STEP));
+  scaleControlBigger.addEventListener('click', () => onScaleChange(ScaleSettings.STEP));
 
 };
 
 setPhotoScale();
 
 const resetPhotoScale = () => {
-  updatePhotoScale(scaleSettings.MAX_VALUE);
+  updatePhotoScale(ScaleSettings.MAX_VALUE);
 };
 
 export {resetPhotoScale};
